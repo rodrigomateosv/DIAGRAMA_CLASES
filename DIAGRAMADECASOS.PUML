@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor User
+
+rectangle "Gestión de clientes" {
+  User --> (Buscar cliente)
+  User --> (Crear cliente)
+  User --> (Modificar cliente)
+  User --> (Borrar cliente)
+  (Buscar cliente) --> (Mostrar cliente)
+  (Crear cliente) --> (Guardar cliente)
+  (Modificar cliente) --> (Guardar cambios)
+  (Borrar cliente) --> (Confirmar borrado)
+  (Mostrar cliente) ..> BASE
+  (Guardar cliente) ..> BASE
+  (Guardar cambios) ..> BASE
+}
+
+@enduml
+
+

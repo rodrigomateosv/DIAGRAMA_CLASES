@@ -1,0 +1,54 @@
+@startuml
+class Cliente {
+    -dni: str
+    -nombre: str
+    -apellido: str
+    +__init__(dni: str, nombre: str, apellido: str)
+    +__str__(): str
+    +to_dict(): dict
+}
+
+class Clientes {
+    -lista: List[Cliente]
+    +buscar(dni: str): Cliente
+    +crear(dni: str, nombre: str, apellido: str): Cliente
+    +modificar(dni: str, nombre: str, apellido: str): Cliente
+    +borrar(dni: str): Cliente
+    +guardar(): None
+}
+
+class CenterWidgetMixin {
+    +center(): None
+}
+
+class CreateClientWindow {
+    -validaciones: List[int]
+    -crear: Button
+    -dni: Entry
+    -nombre: Entry
+    -apellido: Entry
+    +__init__(parent: Tk)
+    +build(): None
+    +create_client(): None
+    +close(): None
+    +validate(event, index: int): None
+}
+
+class MainWindow {
+    -treeview: ttk.Treeview
+    +__init__()
+    +build(): None
+    +delete(): None
+    +create(): None
+    +edit(): None
+}
+
+Cliente --> Clientes
+Clientes ..> Cliente
+CreateClientWindow --|> Toplevel
+CreateClientWindow --|> CenterWidgetMixin
+CreateClientWindow ..> db.Clientes
+MainWindow --|> Tk
+MainWindow --|> CenterWidgetMixin
+MainWindow ..> db.Clientes
+@enduml

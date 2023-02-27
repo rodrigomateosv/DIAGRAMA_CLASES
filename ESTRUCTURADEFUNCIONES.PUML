@@ -1,0 +1,82 @@
+@startuml
+
+class Cliente {
+    -dni: str
+    -nombre: str
+    -apellido: str
+    +__init__(dni: str, nombre: str, apellido: str)
+    +__str__(): str
+    +to_dict(): dict
+}
+
+class Clientes {
+    -lista: list
+    +buscar(dni: str) -> Cliente
+    +crear(dni: str, nombre: str, apellido: str) -> Cliente
+    +modificar(dni: str, nombre: str, apellido: str) -> Cliente
+    +borrar(dni: str) -> Cliente
+    +guardar(): None
+}
+
+class CreateClientWindow {
+    -validaciones: list
+    -crear: Button
+    -dni: Entry
+    -nombre: Entry
+    -apellido: Entry
+    +__init__(parent)
+    +build(): None
+    +create_client(): None
+    +close(): None
+    +validate(event, index): None
+}
+
+class CenterWidgetMixin {
+    +center(): None
+}
+
+class helpers {
+    +dni_valido(dni: str, lista: list) -> bool
+}
+
+class database {
+    <<static>>
+    +DATABASE_PATH: str
+}
+
+class csv {
+    <<module>>
+    +reader()
+    +writer()
+}
+
+class config {
+    <<module>>
+    +DATABASE_PATH: str
+}
+
+class re {
+    <<module>>
+    +match()
+}
+
+class os {
+    <<module>>
+    +system()
+}
+
+class platform {
+    <<module>>
+    +system()
+}
+
+CreateClientWindow --> CenterWidgetMixin
+Clientes --> Cliente
+Clientes --> helpers
+Clientes --> database
+database --> csv
+config --> database
+helpers --> re
+os --> platform
+
+@enduml
